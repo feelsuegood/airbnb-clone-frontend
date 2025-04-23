@@ -62,7 +62,7 @@ export default function RoomDetail() {
                 objectFit={"cover"}
                 w={"100%"}
                 h={"100%"}
-                src={data?.photos[index].file}
+                src={data?.photos[index]?.file}
               />
             </Skeleton>
           </GridItem>
@@ -78,11 +78,13 @@ export default function RoomDetail() {
           <Skeleton isLoaded={!isLoading} h={"30px"}>
             <HStack justifyContent={"flex-start"} w={"100%"}>
               <Text>
-                {data?.rooms} room{data?.rooms === 1 ? "" : "s"}
+                {data?.rooms} room
+                {data?.rooms === 1 || reviewsData?.length === 0 ? "" : "s"}
               </Text>
               <Text>•</Text>
               <Text>
-                {data?.toilets} toilet{data?.toilets === 1 ? "" : "s"}
+                {data?.toilets} toilet
+                {data?.toilets === 1 || reviewsData?.length === 0 ? "" : "s"}
               </Text>
             </HStack>
           </Skeleton>
@@ -92,7 +94,7 @@ export default function RoomDetail() {
       <Box mt={10}>
         <Heading fontSize={"2xl"} mb={5}>
           <Skeleton
-            w={"15%"}
+            w={"30%"}
             h={"35px"}
             isLoaded={!isReviewsLoading && !isLoading}
           >
@@ -101,7 +103,9 @@ export default function RoomDetail() {
               <Text>•</Text>
               <Text>
                 {reviewsData?.length} review
-                {reviewsData?.length === 1 || 0 ? "" : "s"}
+                {reviewsData?.length === 1 || reviewsData?.length === 0
+                  ? ""
+                  : "s"}
               </Text>
             </HStack>
           </Skeleton>
