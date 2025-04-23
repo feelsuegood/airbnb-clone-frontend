@@ -14,6 +14,7 @@ import {
 import { FaLock, FaUserNinja } from "react-icons/fa";
 import SocialLogin from "./SocialLogin";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -21,35 +22,20 @@ interface LoginModalProps {
 }
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const onChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
-    const { name, value } = event.currentTarget;
-    if (name === "username") {
-      setUsername(value);
-    } else if (name === "password") {
-      setPassword(value);
-    }
-  };
-  const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(username, password);
-  };
+  const { register } = useForm();
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Log in</ModalHeader>
         <ModalCloseButton />
-        <ModalBody as={"form"} onSubmit={onSubmit as any}>
+        <ModalBody as={"form"}>
           <VStack>
             <InputGroup>
               <InputLeftElement children={<FaUserNinja />} />
               <Input
                 required
-                name="username"
-                value={username}
-                onChange={onChange}
+                {...register("username")}
                 variant={"filled"}
                 placeholder="Username"
               />
@@ -58,9 +44,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <InputLeftElement children={<FaLock />} />
               <Input
                 required
-                name="password"
-                value={password}
-                onChange={onChange}
+                {...register("password")}
                 variant={"filled"}
                 placeholder="Password"
                 type="password"
