@@ -8,7 +8,6 @@ export default function RoomSkeleton() {
         <SkeletonText w={"50%"} noOfLines={2} mb={6} />
         <SkeletonText w={"15%"} noOfLines={1} mb={10} mr={2} />
       </HStack>
-
       <SkeletonText w={"20%"} noOfLines={1} />
     </Box>
   );

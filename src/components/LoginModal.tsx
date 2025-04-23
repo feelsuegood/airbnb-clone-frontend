@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FaLock, FaUserNinja } from "react-icons/fa";
 import SocialLogin from "./SocialLogin";
+import { useState } from "react";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -20,20 +21,35 @@ interface LoginModalProps {
 }
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const onChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
+    const { name, value } = event.currentTarget;
+    if (name === "username") {
+      setUsername(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
+  const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(username, password);
+  };
   return (
-    <Modal
-      onClose={onClose}
-      isOpen={isOpen}
-    >
+    <Modal onClose={onClose} isOpen={isOpen}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Log in</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody as={"form"} onSubmit={onSubmit as any}>
           <VStack>
             <InputGroup>
               <InputLeftElement children={<FaUserNinja />} />
               <Input
+                required
+                name="username"
+                value={username}
+                onChange={onChange}
                 variant={"filled"}
                 placeholder="Username"
               />
@@ -41,16 +57,17 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <InputGroup>
               <InputLeftElement children={<FaLock />} />
               <Input
+                required
+                name="password"
+                value={password}
+                onChange={onChange}
                 variant={"filled"}
                 placeholder="Password"
+                type="password"
               />
             </InputGroup>
           </VStack>
-          <Button
-            mt={4}
-            w="100%"
-            colorScheme="red"
-          >
+          <Button type="submit" mt={4} w="100%" colorScheme="red">
             Log in
           </Button>
           <SocialLogin />

@@ -51,7 +51,6 @@ export default function Header() {
     });
     await logOut();
     queryClient.refetchQueries({ queryKey: ["me"] });
-
     toast.update(toastID, {
       title: "See you 👋",
       description: "Logged out successfully",
