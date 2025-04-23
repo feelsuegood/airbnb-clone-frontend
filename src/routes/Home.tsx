@@ -34,6 +34,10 @@ export default function Home() {
           <RoomSkeleton />
           <RoomSkeleton />
           <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
         </>
       ) : null}
       {data?.map((room: IRoomList) => (

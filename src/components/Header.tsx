@@ -1,20 +1,31 @@
 import {
+  Avatar,
   Box,
   Button,
   HStack,
   IconButton,
   LightMode,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
   useColorMode,
   useColorModeValue,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { FaAirbnb, FaMoon, FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
+import useUser from "../lib/useUser";
+import { logOut } from "../api";
+import { useQueryClient } from "@tanstack/react-query";
+import { FaAirbnb, FaMoon, FaSun } from "react-icons/fa";
 
 export default function Header() {
+  // getMe -> useUser -> Header
+  const { isUserLoading, user, isLoggedIn } = useUser();
   const {
     isOpen: isLoginOpen,
     onClose: onLoginClose,
@@ -28,6 +39,25 @@ export default function Header() {
   const { toggleColorMode } = useColorMode();
   const logoColor = useColorModeValue("red.500", "red.200");
   const Icon = useColorModeValue(FaMoon, FaSun);
+  const toast = useToast();
+  // for automatically refetching, absolute bosss
+  const queryClient = useQueryClient();
+  const onLogOut = async () => {
+    const toastID = toast({
+      title: "Logging out...",
+      description: "Sad to see you go 😭",
+      status: "loading",
+      position: "bottom-right",
+    });
+    await logOut();
+    queryClient.refetchQueries({ queryKey: ["me"] });
+
+    toast.update(toastID, {
+      title: "See you 👋",
+      description: "Logged out successfully",
+      status: "success",
+    });
+  };
 
   return (
     <Stack
@@ -57,12 +87,28 @@ export default function Header() {
           aria-label="Toggle dark mode"
           icon={<Icon />}
         />
-        <Button onClick={onLoginOpen}>Log in</Button>
-        <LightMode>
-          <Button onClick={onSignUpOpen} colorScheme={"red"}>
-            Sign up
-          </Button>
-        </LightMode>
+        {/* different ui for a login user and unloggedin user */}
+        {!isUserLoading ? (
+          !isLoggedIn ? (
+            <>
+              <Button onClick={onLoginOpen}>Log in</Button>
+              <LightMode>
+                <Button onClick={onSignUpOpen} colorScheme={"red"}>
+                  Sign up
+                </Button>
+              </LightMode>
+            </>
+          ) : (
+            <Menu>
+              <MenuButton>
+                <Avatar size={"md"} name={user?.name} src={user?.avatar} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={onLogOut}>Log out</MenuItem>
+              </MenuList>
+            </Menu>
+          )
+        ) : null}
       </HStack>
       <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />
       <SignUpModal isOpen={isSignUpOpen} onClose={onSignUpClose} />

@@ -14,11 +14,7 @@ export default function SocialLogin() {
     <Box mb={4}>
       <HStack my={8}>
         <Divider />
-        <Text
-          transform="uppercase"
-          fontSize="xs"
-          as="b"
-        >
+        <Text transform="uppercase" fontSize="xs" as="b">
           Or
         </Text>
         <Divider />
@@ -30,6 +26,8 @@ export default function SocialLogin() {
           bg="gray.600"
           _hover={{ bg: "gray.800" }}
           color="white"
+          as="a"
+          href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&scope=read:user,user:email`}
         >
           Continue with GitHub
         </Button>
