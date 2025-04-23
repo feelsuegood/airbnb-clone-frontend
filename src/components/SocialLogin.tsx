@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -10,6 +11,17 @@ import {
 import { FaComment, FaGithub } from "react-icons/fa";
 
 export default function SocialLogin() {
+  const githubParams = {
+    client_id: process.env.REACT_APP_GH_CLIENT_ID || "",
+    scope: "read:user,user:email",
+  };
+  const githubProcessedParams = new URLSearchParams(githubParams).toString();
+  const kakaoParams = {
+    client_id: process.env.REACT_APP_KAKAO_CLIENT_ID || "",
+    redirect_uri: "http://127.0.0.1:3000/social/kakao",
+    response_type: "code",
+  };
+  const kakaoProcessedParams = new URLSearchParams(kakaoParams).toString();
   return (
     <Box mb={4}>
       <HStack my={8}>
@@ -27,7 +39,7 @@ export default function SocialLogin() {
           _hover={{ bg: "gray.800" }}
           color="white"
           as="a"
-          href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&scope=read:user,user:email`}
+          href={`https://github.com/login/oauth/authorize?${githubProcessedParams}`}
         >
           Continue with GitHub
         </Button>
@@ -38,6 +50,8 @@ export default function SocialLogin() {
             bg="yellow.300"
             _hover={{ bg: "yellow.400" }}
             color="black"
+            as="a"
+            href={`https://kauth.kakao.com/oauth/authorize?${kakaoProcessedParams}`}
           >
             Continue with Kakao
           </Button>

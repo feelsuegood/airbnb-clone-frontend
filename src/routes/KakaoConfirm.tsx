@@ -1,10 +1,10 @@
 import { Heading, Spinner, Text, useToast, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { githubLogIn } from "../api";
+import { kakaoLogIn } from "../api";
 import { useQueryClient } from "@tanstack/react-query";
 
-export default function GithubConfirm() {
+export default function KakaoConfirm() {
   // get url
   const { search } = useLocation();
   const toast = useToast();
@@ -14,7 +14,7 @@ export default function GithubConfirm() {
     const params = new URLSearchParams(search);
     const code = params.get("code");
     if (code) {
-      const status = await githubLogIn(code);
+      const status = await kakaoLogIn(code);
       if (status === 200) {
         toast({
           title: "Welcome",
