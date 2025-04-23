@@ -1,4 +1,5 @@
 import {
+  AspectRatio,
   Box,
   Button,
   Grid,
@@ -34,19 +35,21 @@ export default function Room({
   return (
     <Link to={`/rooms/${pk}`}>
       <VStack alignItems={"flex-start"}>
-        <Box position={"relative"} overflow={"hidden"} mb={3} rounded={"2xl"}>
-          <Image minH="240" src={imageUrl} />
-          <Button
-            variant={"unstyled"}
-            cursor={"pointer"}
-            position={"absolute"}
-            top={0}
-            right={0}
-            color={"white"}
-          >
-            <FaRegHeart />
-          </Button>
-        </Box>
+        <AspectRatio ratio={4 / 3} w="100%">
+          <Box position={"relative"} overflow={"hidden"} mb={3} rounded={"2xl"}>
+            <Image minH={"240"} objectFit={"cover"} src={imageUrl} />
+            <Button
+              variant={"unstyled"}
+              cursor={"pointer"}
+              position={"absolute"}
+              top={0}
+              right={0}
+              color={"white"}
+            >
+              <FaRegHeart />
+            </Button>
+          </Box>
+        </AspectRatio>
         <Box>
           <Grid gap={2} templateColumns={"6fr 1fr"}>
             <Text display={"block"} as={"b"} noOfLines={1} fontSize={"medium"}>
