@@ -2,8 +2,12 @@ import { useEffect } from "react";
 import useUser from "../lib/useUser";
 import { useNavigate } from "react-router-dom";
 
+interface IHostOnlyPageProps {
+  children: React.ReactNode;
+}
+
 // block unloggedin user and not host user
-export default function useHostOnlyPage() {
+export default function HostOnlyPage({ children }: IHostOnlyPageProps) {
   // in Header.tsx, useUser() is already called so it's cached
   const { isUserLoading, user } = useUser();
   const navigate = useNavigate();
@@ -14,5 +18,5 @@ export default function useHostOnlyPage() {
       }
     }
   }, [user, isUserLoading, navigate]);
-  return;
+  return <>{children}</>;
 }
