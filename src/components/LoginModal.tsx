@@ -50,7 +50,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   >({
     mutationFn: usernameLogIn,
     onSuccess: (data) => {
-      console.log("mutation is successful");
       toast({
         title: "Welcome",
         description: "Logged in successfully",
@@ -61,14 +60,11 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
       queryClient.refetchQueries({ queryKey: ["me"] });
       reset();
     },
-    onError: (error) => {
-      console.log("mutation has an error");
-    },
+    onError: (error) => {},
   });
   const onSubmit = ({ username, password }: IForm) => {
     mutation.mutate({ username, password });
   };
-  // console.log(errors);
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
       <ModalOverlay />
