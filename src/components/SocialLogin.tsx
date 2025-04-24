@@ -19,7 +19,7 @@ export default function SocialLogin() {
   const githubProcessedParams = new URLSearchParams(githubParams).toString();
   const kakaoParams = {
     client_id: process.env.REACT_APP_KAKAO_CLIENT_ID || "",
-    redirect_uri: "http://127.0.0.1:3000/social/kakao",
+    redirect_uri: "https://sueweetbnb.xyz/social/kakao",
     response_type: "code",
   };
   const kakaoProcessedParams = new URLSearchParams(kakaoParams).toString();
