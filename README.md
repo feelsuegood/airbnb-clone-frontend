@@ -1,8 +1,8 @@
-# SueweetBnB Frontend
+# 🍭 Sueweetbnb Frontend
 
 An Airbnb clone built web app with React and TypeScript.
 
-## Features
+## 🕹️ Features
 
 - Room listing and detailed views
 - Social login (GitHub, Kakao)
@@ -10,7 +10,7 @@ An Airbnb clone built web app with React and TypeScript.
 - Type-safe development with TypeScript
 - Efficient data management with React Query
 
-## Tech Stack
+## 🤖 Tech Stack
 
 - React 18
 - TypeScript
@@ -19,7 +19,7 @@ An Airbnb clone built web app with React and TypeScript.
 - React Query
 - Axios
 
-## Getting Started
+## 🏃‍♀️ Getting Started
 
 1. Create a `.env` file in the root directory with:
 
@@ -32,7 +32,7 @@ REACT_APP_KAKAO_CLIENT_ID=your_kakao_client_id
 
 - The app will run on [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
-## Project Structure
+## 👀 Project Structure
 
 ```
 src/
@@ -45,7 +45,7 @@ src/
 └── types.d.ts    # TypeScript type definitions
 ```
 
-## Development
+## 👩‍💻 Development
 
 - Uses React Query for efficient data fetching and caching
 - Implements responsive design with Chakra UI
