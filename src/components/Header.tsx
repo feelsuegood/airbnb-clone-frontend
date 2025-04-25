@@ -9,7 +9,6 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Stack,
   ToastId,
   useColorMode,
   useColorModeValue,
@@ -71,11 +70,14 @@ export default function Header() {
   };
 
   return (
-    <Stack
+    <HStack
       justifyContent={"space-between"}
       alignItems={"center"}
       py={5}
-      px={40}
+      px={{
+        sm: 4,
+        md: 40,
+      }}
       spacing={{
         sm: 4,
         md: 0,
@@ -128,6 +130,6 @@ export default function Header() {
       </HStack>
       <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />
       <SignUpModal isOpen={isSignUpOpen} onClose={onSignUpClose} />
-    </Stack>
+    </HStack>
   );
 }
