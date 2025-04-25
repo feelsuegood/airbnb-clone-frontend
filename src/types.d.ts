@@ -1,6 +1,6 @@
 export interface IRoomPhoto {
   pk: string;
-  file: string;
+  file?: string;
   description: string;
 }
 
@@ -13,6 +13,19 @@ export interface IRoomList {
   rating: number;
   is_owner: boolean;
   photos: IRoomPhoto[];
+  is_owner: boolean;
+}
+
+export interface IRoomIdList {
+  id: number;
+  name: string;
+  country: string;
+  city: string;
+  price: number;
+  rating: number;
+  is_owner: boolean;
+  photos: IRoomPhoto[];
+  is_owner: boolean;
 }
 
 export interface IRoomOwner {
@@ -22,10 +35,16 @@ export interface IRoomOwner {
 }
 
 export interface IAmenity {
+  pk: number;
   name: string;
   description: string;
 }
 
+export interface ICategory {
+  pk: number;
+  name: string;
+  kind: string;
+}
 export interface IRoomDetail extends IRoomList {
   created_at: string;
   updated_at: string;
@@ -37,10 +56,24 @@ export interface IRoomDetail extends IRoomList {
   kind: string;
   is_owner: boolean;
   is_liked: boolean;
-  category: {
-    name: string;
-    kind: string;
-  };
+  category: ICategory;
+  owner: IRoomOwner;
+  amenities: IAmenity[];
+}
+
+// * when user upload a room, django response.data has id not pk
+export interface IRoomIdDetail extends IRoomIdList {
+  created_at: string;
+  updated_at: string;
+  rooms: number;
+  toilets: number;
+  description: string;
+  address: string;
+  pet_friendly: true;
+  kind: string;
+  is_owner: boolean;
+  is_liked: boolean;
+  category: ICategory;
   owner: IRoomOwner;
   amenities: IAmenity[];
 }

@@ -1,4 +1,4 @@
-import React from "react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
@@ -17,12 +17,14 @@ export const getRooms = () => {
 };
 
 export const getRoom = ({ queryKey }: QueryFunctionContext) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, roomPk] = queryKey;
   return instance.get(`rooms/${roomPk}`).then((response) => response.data);
   // * return instance.get(`rooms/${queryKey[1]}`).then((response) => response.data);
 };
 
 export const getRoomReviews = ({ queryKey }: QueryFunctionContext) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, roomPk] = queryKey;
   return instance
     .get(`rooms/${roomPk}/reviews`)
@@ -112,16 +114,89 @@ export interface ISignUpSuccess {
 export interface ISignUpError {
   error: string;
 }
-export const signUp = ({
-  name,
-  email,
-  username,
-  password,
-}: ISignUpVariables) => {
+export const signUp = (variables: ISignUpVariables) => {
+  return instance
+    .post("users/sign-up", variables, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const getAmenities = () => {
+  return instance.get(`rooms/amenities`).then((response) => response.data);
+};
+
+export const getRoomCategories = () => {
+  return instance.get(`categories/rooms`).then((response) => response.data);
+};
+
+export interface IUploadRoomVariables {
+  name: string;
+  country: string;
+  city: string;
+  price: number;
+  rooms: number;
+  toilets: number;
+  description: string;
+  address: string;
+  pet_friendly: boolean;
+  kind: string;
+  amenities: number[];
+  category: number;
+}
+export const uploadRoom = (variables: IUploadRoomVariables) => {
+  return instance
+    .post("rooms/", variables, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const getuploadURL = () => {
+  return instance
+    .post("medias/photos/get-url", null, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const uploadImage = ({
+  file,
+  uploadURL,
+}: {
+  file: FileList;
+  uploadURL: string;
+}) => {
+  const form = new FormData();
+  form.append("file", file[0]);
+  return axios
+    .post(uploadURL, form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const uploadRoomPhoto = ({
+  file,
+  description,
+  roomPk,
+}: {
+  file: string;
+  description: string;
+  roomPk: string;
+}) => {
   return instance
     .post(
-      "users/sign-up",
-      { name, email, username, password },
+      `rooms/${roomPk}/photos`,
+      { file, description },
       {
         headers: {
           "X-CSRFToken": Cookie.get("csrftoken") || "",
@@ -130,6 +205,7 @@ export const signUp = ({
     )
     .then((response) => response.data);
 };
+
 // * second
 // export async function getRooms() {
 //   const response = await instance(`rooms/`);
