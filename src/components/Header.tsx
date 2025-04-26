@@ -23,7 +23,7 @@ import { logOut } from "../api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { LuCandy } from "react-icons/lu";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Header() {
   // getMe -> useUser -> Header
@@ -69,6 +69,17 @@ export default function Header() {
   const onLogOut = async () => {
     mutation.mutate();
   };
+  useEffect(() => {
+    toast({
+      status: "info",
+      title: "Practice Project",
+      description:
+        "This website is part of my personal portfolio and is for educational and non-commercial purposes only.",
+      isClosable: true,
+      duration: 10000,
+      position: "top",
+    });
+  }, []);
 
   return (
     <HStack
