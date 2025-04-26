@@ -129,7 +129,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
             </InputGroup>
           </VStack>
           {mutation.error ? (
-            <Text color={"red.500"} textAlign={"center"} fontSize={"sm"}>
+            <Text color={"purple.500"} textAlign={"center"} fontSize={"sm"}>
               Please enter valid inputs
             </Text>
           ) : null}
@@ -138,7 +138,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
             type="submit"
             mt={4}
             w="100%"
-            colorScheme="red"
+            colorScheme="purple"
           >
             Sign up
           </Button>

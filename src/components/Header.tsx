@@ -39,7 +39,7 @@ export default function Header() {
     onOpen: onSignUpOpen,
   } = useDisclosure();
   const { toggleColorMode } = useColorMode();
-  const logoColor = useColorModeValue("red.500", "red.200");
+  const logoColor = useColorModeValue("purple.500", "purple:500");
   const Icon = useColorModeValue(FaMoon, FaSun);
   const toast = useToast();
   // for automatically refetching, absolute bosss
@@ -118,7 +118,7 @@ export default function Header() {
             <>
               <Button onClick={onLoginOpen}>Log in</Button>
               <LightMode>
-                <Button onClick={onSignUpOpen} colorScheme={"red"}>
+                <Button onClick={onSignUpOpen} colorScheme={"purple"}>
                   Sign up
                 </Button>
               </LightMode>

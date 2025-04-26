@@ -104,7 +104,7 @@ export default function UploadPhotos() {
                   uploadURLMutation.isPending
                 }
                 w="full"
-                colorScheme={"red"}
+                colorScheme={"purple"}
                 type="submit"
               >
                 Upload photos

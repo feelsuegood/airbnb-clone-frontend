@@ -100,7 +100,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             </InputGroup>
           </VStack>
           {mutation.error ? (
-            <Text color={"red.500"} textAlign={"center"} fontSize={"sm"}>
+            <Text color={"purple.500"} textAlign={"center"} fontSize={"sm"}>
               Username or password are wrong
             </Text>
           ) : null}
@@ -109,7 +109,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             type="submit"
             mt={4}
             w="100%"
-            colorScheme="red"
+            colorScheme="purple"
           >
             Log in
           </Button>
