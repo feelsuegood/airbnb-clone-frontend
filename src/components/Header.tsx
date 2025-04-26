@@ -74,7 +74,7 @@ export default function Header() {
       status: "info",
       title: "Practice Project",
       description:
-        "This website is part of my personal portfolio and is for educational and non-commercial purposes only.",
+        "This website is part of a personal portfolio and is for educational and non-commercial purposes only.",
       isClosable: true,
       duration: 20000,
       position: "top",
