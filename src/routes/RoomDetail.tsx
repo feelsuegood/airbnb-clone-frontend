@@ -1,10 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getRoom, getRoomReviews } from "../api";
+import {
+  checkBooking,
+  checkBookingQueryKey,
+  getRoom,
+  getRoomReviews,
+} from "../api";
 import { IRoomDetail, IReview } from "../types";
 import {
   Avatar,
   Box,
+  Button,
   Container,
   Grid,
   GridItem,
@@ -18,11 +24,14 @@ import {
 import { FaStar } from "react-icons/fa";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import "../styles/Calendar.css";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
+// type Value = [ValuePiece, ValuePiece];
 
 export default function RoomDetail() {
   const { roomPk } = useParams();
@@ -37,7 +46,14 @@ export default function RoomDetail() {
     queryFn: getRoomReviews,
   });
   const [dates, setDates] = useState<Value>();
-  console.log(dates);
+  const { isLoading: IsCheckingBooking, data: checkBookingData } = useQuery({
+    queryKey: ["check", roomPk, dates] as checkBookingQueryKey,
+    queryFn: checkBooking,
+    enabled: dates !== undefined,
+    gcTime: 0,
+  });
+  // console.log(checkBookingData, IsCheckingBooking);
+
   return (
     <Box
       mt={10}
@@ -47,6 +63,9 @@ export default function RoomDetail() {
         lg: 40,
       }}
     >
+      <Helmet>
+        <title>{data ? data.name : "Loading..."}</title>
+      </Helmet>
       <Skeleton height={"43px"} w="25%" isLoaded={!isLoading}>
         <Heading w="500px">{data?.name}</Heading>
       </Skeleton>
@@ -79,7 +98,7 @@ export default function RoomDetail() {
           </GridItem>
         ))}
       </Grid>
-      <Grid gap={20} templateColumns={"2fr 1fr"} maxW="container.lg">
+      <Grid gap={20} templateColumns={"2fr 1fr"} maxW="container.xl">
         <Box>
           <HStack mt={10} justifyContent={"space-between"}>
             <VStack alignItems={"flex-start"}>
@@ -158,7 +177,7 @@ export default function RoomDetail() {
             </Container>
           </Box>
         </Box>
-        <Box pt={10}>
+        <Box pt={10} borderRadius="md">
           <Calendar
             onChange={setDates}
             prev2Label={null}
@@ -167,7 +186,22 @@ export default function RoomDetail() {
             minDate={new Date()}
             maxDate={new Date(Date.now() + 60 * 60 * 24 * 7 * 4 * 6 * 1000)}
             selectRange
+            className="custom-calendar"
           />
+          <Button
+            disabled={!checkBookingData?.ok}
+            isLoading={IsCheckingBooking}
+            my={5}
+            w={"100%"}
+            colorScheme="purple"
+          >
+            Make booking
+          </Button>
+          {!IsCheckingBooking && !checkBookingData?.ok ? (
+            <Text color={"red.800"} fontWeight={"bold"}>
+              Can't book those dates 😢
+            </Text>
+          ) : null}
         </Box>
       </Grid>
     </Box>

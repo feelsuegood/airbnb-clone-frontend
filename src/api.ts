@@ -2,6 +2,7 @@
 import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
+import { formatDate } from "./lib/utils";
 
 const instance = axios.create({
   baseURL:
@@ -204,6 +205,31 @@ export const uploadRoomPhoto = ({
       },
     )
     .then((response) => response.data);
+};
+
+export type checkBookingQueryKey = [string, number?, [Date, Date]?];
+
+export const checkBooking = ({
+  queryKey,
+}: QueryFunctionContext<checkBookingQueryKey>) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, roomPk, dates] = queryKey;
+  if (dates) {
+    const selectedDates = Array.isArray(dates)
+      ? {
+          // [x]Timezone is not applied to these codes.
+          // checkIn: dates[0]?.toJSON().split("T")[0],
+          // checkOut: dates[1]?.toJSON().split("T")[0],
+          checkIn: formatDate(dates[0]),
+          checkOut: formatDate(dates[1]),
+        }
+      : dates;
+    return instance
+      .get(
+        `rooms/${roomPk}/bookings/check?check_in=${selectedDates.checkIn}&check_out=${selectedDates.checkOut}`,
+      )
+      .then((response) => response.data);
+  }
 };
 
 // * second

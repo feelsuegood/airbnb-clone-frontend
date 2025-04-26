@@ -45,7 +45,7 @@ export default function SignUpModal({ isOpen, onClose }: SignUpModalProps) {
   const mutation = useMutation<ISignUpSuccess, ISignUpError, ISignUpVariables>({
     mutationFn: signUp,
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
       toast({
         title: "Welcome 🥳",
         description: "Signed up successfully",

@@ -51,3 +51,17 @@ src/
 - Implements responsive design with Chakra UI
 - Follows TypeScript best practices
 - Implements social authentication
+
+## 🔧 Improvements
+
+- **Edit Room Page**  
+  Used the same page as the **Upload Room** form to edit room details. This keeps the user experience simple and avoids repeating code.
+
+- **Booking Features**
+
+  - Added a **mutation** to let users book rooms.
+  - Made a **Booking Check Page for users** to see their reservations.
+  - Built a **Booking Management Page for hosts** to check and manage guest bookings.
+
+- **🧪 Personal Challenge: Experiences Page**  
+  Started making **Experiences** pages similar to **Rooms**, using the same layout and logic.

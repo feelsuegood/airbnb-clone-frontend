@@ -34,7 +34,7 @@ export default function UploadPhotos() {
   const uploadRoomPhotoMutation = useMutation({
     mutationFn: uploadRoomPhoto,
     onSuccess: (data: any) => {
-      console.log(data);
+      // console.log(data);
       toast({
         status: "success",
         title: "Photo uploaded successfully",
@@ -48,10 +48,13 @@ export default function UploadPhotos() {
   const uploadImageMutation = useMutation({
     mutationFn: uploadImage,
     onSuccess: ({ result }: any) => {
-      console.log(result);
+      // console.log(result);
       if (roomPk) {
         uploadRoomPhotoMutation.mutate({
-          description: watch("description"),
+          description:
+            watch("description") === ""
+              ? "no description"
+              : watch("description"),
           file: `https://imagedelivery.net/8wupMKx7lfJzP_Fr3VkPUA/${result.id}/public`,
           roomPk,
         });
