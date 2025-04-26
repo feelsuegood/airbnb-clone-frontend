@@ -21,7 +21,8 @@ import SignUpModal from "./SignUpModal";
 import useUser from "../lib/useUser";
 import { logOut } from "../api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { FaAirbnb, FaMoon, FaSun } from "react-icons/fa";
+import { FaMoon, FaSun } from "react-icons/fa";
+import { LuCandy } from "react-icons/lu";
 import { useRef } from "react";
 
 export default function Header() {
@@ -90,7 +91,7 @@ export default function Header() {
     >
       <Box color={logoColor}>
         <Link to={"/"}>
-          <FaAirbnb size={"48"} />
+          <LuCandy size={"48"} />
         </Link>
       </Box>
       <HStack spacing={2}>
