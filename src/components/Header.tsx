@@ -85,6 +85,7 @@ export default function Header() {
     <HStack
       justifyContent={"space-between"}
       alignItems={"center"}
+      mx={10}
       py={5}
       px={{
         sm: 4,

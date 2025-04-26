@@ -30,14 +30,9 @@ export default function Home() {
     >
       {isLoading ? (
         <>
-          <RoomSkeleton />
-          <RoomSkeleton />
-          <RoomSkeleton />
-          <RoomSkeleton />
-          <RoomSkeleton />
-          <RoomSkeleton />
-          <RoomSkeleton />
-          <RoomSkeleton />
+          {[...Array(18)].map((_, index) => (
+            <RoomSkeleton key={index} />
+          ))}
         </>
       ) : null}
       {data?.map((room: IRoomList) => (
