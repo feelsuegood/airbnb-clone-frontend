@@ -204,7 +204,7 @@ export default function UploadRoom() {
                 </Grid>
               </FormControl>
               {mutation.isError ? (
-                <Text color={"purple.500"}>Something went wrong</Text>
+                <Text color={"red.500"}>Something went wrong</Text>
               ) : null}
               <Button
                 type="submit"

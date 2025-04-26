@@ -39,7 +39,7 @@ export default function Header() {
     onOpen: onSignUpOpen,
   } = useDisclosure();
   const { toggleColorMode } = useColorMode();
-  const logoColor = useColorModeValue("purple.500", "purple:500");
+  const logoColor = useColorModeValue("purple.300", "purple:300");
   const Icon = useColorModeValue(FaMoon, FaSun);
   const toast = useToast();
   // for automatically refetching, absolute bosss
@@ -76,7 +76,7 @@ export default function Header() {
       description:
         "This website is part of my personal portfolio and is for educational and non-commercial purposes only.",
       isClosable: true,
-      duration: 10000,
+      duration: 20000,
       position: "top",
     });
   }, []);
