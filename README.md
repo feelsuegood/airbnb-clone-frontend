@@ -1,6 +1,6 @@
-# 🍭 Sueweetbnb Frontend
+# 🍭 Sueweetstay - Frontend
 
-An Airbnb clone built web app with React and TypeScript.
+An Airbnb-inspired web app built with React and TypeScript.
 
 ## 🕹️ Features
 
